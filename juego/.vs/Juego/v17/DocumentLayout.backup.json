@@ -1,0 +1,45 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ismae\\Documents\\juego\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{75601EE1-A4BB-4F11-85AF-AADB1179EE5C}|Juego.csproj|c:\\users\\ismae\\documents\\juego\\node2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75601EE1-A4BB-4F11-85AF-AADB1179EE5C}|Juego.csproj|solutionrelative:node2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Node2d.cs",
+              "DocumentMoniker": "C:\\Users\\ismae\\Documents\\juego\\Node2d.cs",
+              "RelativeDocumentMoniker": "Node2d.cs",
+              "ToolTip": "C:\\Users\\ismae\\Documents\\juego\\Node2d.cs*",
+              "RelativeToolTip": "Node2d.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T18:13:55.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
