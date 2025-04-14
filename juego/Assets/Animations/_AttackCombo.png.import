@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drhg66b62uq5y"
-path="res://.godot/imported/Old hero.png-f7c30a22d3034e2af8d448eeb1c10aac.ctex"
+uid="uid://dj7ksw8g77v23"
+path="res://.godot/imported/_AttackCombo.png-b315974889502fb470449064a9014615.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/Old hero.png"
-dest_files=["res://.godot/imported/Old hero.png-f7c30a22d3034e2af8d448eeb1c10aac.ctex"]
+source_file="res://Assets/Animations/_AttackCombo.png"
+dest_files=["res://.godot/imported/_AttackCombo.png-b315974889502fb470449064a9014615.ctex"]
 
 [params]
 

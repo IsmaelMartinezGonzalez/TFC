@@ -1,3 +1,40 @@
-[gd_scene format=3 uid="uid://bpj8ksu0o61je"]
+[gd_scene load_steps=5 format=3 uid="uid://bpj8ksu0o61je"]
+
+[ext_resource type="PackedScene" uid="uid://bbfs8lpilvliw" path="res://Assets/Scenes/Prota.tscn" id="1_ob0po"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_ob0po"]
+script/source = "using Godot;
+using System;
+
+public partial class Mundo : Sprite2D
+{
+}
+"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_u3ux8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gr43s"]
+size = Vector2(786, 47)
 
 [node name="Mundo" type="Node2D"]
+script = SubResource("CSharpScript_ob0po")
+
+[node name="Prota" parent="." instance=ExtResource("1_ob0po")]
+position = Vector2(401, 451)
+speed = 100.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 453)
+zoom = Vector2(3, 3)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(31, 480)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(386, 32.0001)
+scale = Vector2(782.5, 49)
+texture = SubResource("PlaceholderTexture2D_u3ux8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(382, 31.5)
+shape = SubResource("RectangleShape2D_gr43s")
