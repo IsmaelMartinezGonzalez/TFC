@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1y7cn3ydbu8s"
+path="res://.godot/imported/Ataque espada.mp3-ee63c6c0d6d6f985515f649ee02c4398.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Ataque espada.mp3"
+dest_files=["res://.godot/imported/Ataque espada.mp3-ee63c6c0d6d6f985515f649ee02c4398.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
