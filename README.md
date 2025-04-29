@@ -1,3 +1,5 @@
+# Registro de Desarrollo
+
 ### ✅ 18 de abril
 - Se hizo animaciones de movimiento, salto, ataque y ya se enlazó una hitbox para el ataque y el dash.
 
@@ -11,8 +13,13 @@
 - La hurtbox se deshabilita para que dé un momento de invulnerabilidad.
 - Se consiguió un cooldown para el dash también.
 
+### ✅ 26 de abril
+- Se añadió las colisiones a los mapas y se empezó con el nivel uno.
+
+### ✅ 27 de abril
+- Se finalizó el primer nivel y parte del segundo.
+
 ---
 
 ### 🔜 Próximos pasos
-- Se tiene pensado empezar ya con los mapas y las colisiones de estas.
-- También se planea implementar pantallas como el menú.
+- Se tiene pensado empezar con las pantallas y finalizar por lo menos el nivel dos, el resto de texto no lo cambies.
