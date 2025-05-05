@@ -19,7 +19,13 @@
 ### ✅ 27 de abril
 - Se finalizó el primer nivel y parte del segundo.
 
+### ✅ 3 de mayo
+- Se finalizó el segundo nivel.
+
+### ✅ 5 de mayo
+- Se finalizó el tercer nivel y se gestionó el cambio entre escenas de niveles, también como la organización de archivos.
+
 ---
 
 ### 🔜 Próximos pasos
-- Se tiene pensado empezar con las pantallas y finalizar por lo menos el nivel dos, el resto de texto no lo cambies.
+- Se tiene pensado hacer las pantallas de menú simple y empezar con la creación de enemigos.
