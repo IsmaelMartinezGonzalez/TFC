@@ -2828,7 +2828,7 @@ position = Vector2(1269, 413.5)
 shape = SubResource("RectangleShape2D_krkd6")
 
 [node name="Prota" parent="LevelManager" groups=["Jugador"] instance=ExtResource("1_ob0po")]
-position = Vector2(190, 323)
+position = Vector2(128, 332)
 speed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="LevelManager/Prota"]
