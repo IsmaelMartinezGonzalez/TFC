@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpj8ksu0o61je"]
+[gd_scene load_steps=25 format=3 uid="uid://bpj8ksu0o61je"]
 
 [ext_resource type="Texture2D" uid="uid://b5fxe3h035dxp" path="res://Assets/Scenary/Lvl2/Enviroment.png" id="1_jjlit"]
 [ext_resource type="Script" uid="uid://w4clj5ct6pbm" path="res://Assets/Scenes/LevelManager.cs" id="1_krkd6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b5uwsws5y2tuq" path="res://Assets/Scenary/Lvl1/BG2.png" id="5_krkd6"]
 [ext_resource type="Texture2D" uid="uid://jkbm7owbmlbw" path="res://Assets/Scenary/Lvl1/BG1.png" id="6_v2w4x"]
 [ext_resource type="Script" uid="uid://chw2rmn8o3xw5" path="res://Assets/Scenes/CambioNivel.cs" id="9_6u7a1"]
+[ext_resource type="PackedScene" uid="uid://bx8aq0o4i0f4k" path="res://Assets/Scenes/Skeleton.tscn" id="15_0fbk8"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_ob0po"]
 script/source = "using Godot;
@@ -2828,11 +2829,18 @@ position = Vector2(1269, 413.5)
 shape = SubResource("RectangleShape2D_krkd6")
 
 [node name="Prota" parent="LevelManager" groups=["Jugador"] instance=ExtResource("1_ob0po")]
-position = Vector2(128, 332)
+position = Vector2(132, 345)
 speed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="LevelManager/Prota"]
 position = Vector2(-6, 23)
 zoom = Vector2(2, 2)
+
+[node name="Skeleton" parent="LevelManager" groups=["Enemigo"] instance=ExtResource("15_0fbk8")]
+position = Vector2(-79, -3)
+
+[node name="Skeleton2" parent="LevelManager" groups=["Enemigo"] instance=ExtResource("15_0fbk8")]
+position = Vector2(673, -68)
+distanciaPatrulla = 100.0
 
 [connection signal="body_entered" from="LevelManager/Nvl1/CambioNivel" to="LevelManager/Nvl1/CambioNivel" method="_on_cambioNivel_body_entered"]

@@ -18,6 +18,7 @@ public partial class Protagonista : CharacterBody2D
 
     private Vector2 velocity = Vector2.Zero;
     private bool atacando = false;
+    private int vida = 3;
     private bool dashing = false;
     private float dashTimer = 0f;
     private float dashCooldownTimer = 0f;
@@ -27,11 +28,16 @@ public partial class Protagonista : CharacterBody2D
     {
         sprite.AnimationFinished += OnAnimationFinished;
 
-        if (hitboxataque != null)
+        if (hitboxataque != null){
             hitboxataque.Monitoring = false;
+        }
 
-        if (ataque_espada != null)
+        if (ataque_espada != null) {
             ataque_espada.Disabled = true;
+        }
+
+        hitboxataque.BodyEntered += _on_hitbox_ataque_body_entered;
+
     }
 
     public override void _PhysicsProcess(double delta)
@@ -158,5 +164,32 @@ public partial class Protagonista : CharacterBody2D
             else
                 sprite.Play("correr");
         }
+    }
+
+    private void _on_hitbox_ataque_body_entered(Node body)
+    {
+        if (body.IsInGroup("Enemigo"))
+        {
+           ((Skeleton)body).damaged();
+        }
+    }
+
+    public async void damaged()
+    {
+        GD.Print("vida"+vida);
+        vida--;
+        if (vida <= 0)
+        {
+            death();
+        }
+        sprite.Play("dañado");
+        await ToSignal(sprite, "animation_finished");
+    }
+
+    private async void death()
+    {
+        sprite.Play("muerto");
+        await ToSignal(sprite, "animation_finished");
+        // GetTree().ReloadCurrentScene();
     }
 }
