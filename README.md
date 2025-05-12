@@ -25,7 +25,25 @@
 ### ✅ 5 de mayo
 - Se finalizó el tercer nivel y se gestionó el cambio entre escenas de niveles, también como la organización de archivos.
 
+### ✅ 8 de mayo
+- Se retocó el nivel 3 y un poco los anteriores, se seleccionó texturas de enemigos y se empezó muy básicamente a crearlos.
+
+### ✅ 9 de mayo
+- Se creó el primer enemigo, el esqueleto, se le agregó animaciones y hitbox.
+
+### ✅ 10 de mayo
+- Se agregó movimiento simple al enemigo, de patrullaje de punto A a punto B y se pulieron animaciones y organización de proyecto.
+
+### ✅ 12 de mayo
+- Se añadieron sensores de ataque, ahora el enemigo tiene vida y tiene animación de muerte, así como muerte funcional y recibe daño del jugador solo cuando ataca con la hitbox.
+
 ---
 
 ### 🔜 Próximos pasos
-- Se tiene pensado hacer las pantallas de menú simple y empezar con la creación de enemigos.
+- Se tiene pensado hacer que el enemigo ataque al jugador y este muera.
+- Conforme al proyecto final, se tiene pensado añadir 2-3 tipos más de enemigos para cada nivel.
+- Un HUD simple de vidas para el protagonista.
+- Una pantalla para el *Game Over* que solo te deje empezar desde el primer nivel.
+- Una pantalla de victoria simple.
+
+> 📝 *Se hacen estos recortes debido a la escasez de tiempo.*
