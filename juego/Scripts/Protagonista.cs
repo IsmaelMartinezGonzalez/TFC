@@ -18,7 +18,9 @@ public partial class Protagonista : CharacterBody2D
 
     private Vector2 velocity = Vector2.Zero;
     private bool atacando = false;
-    private int vida = 3;
+    private int vida = 4;
+    private bool dañado = false;
+    private bool muerto = false;
     private bool dashing = false;
     private float dashTimer = 0f;
     private float dashCooldownTimer = 0f;
@@ -28,11 +30,13 @@ public partial class Protagonista : CharacterBody2D
     {
         sprite.AnimationFinished += OnAnimationFinished;
 
-        if (hitboxataque != null){
+        if (hitboxataque != null)
+        {
             hitboxataque.Monitoring = false;
         }
 
-        if (ataque_espada != null) {
+        if (ataque_espada != null)
+        {
             ataque_espada.Disabled = true;
         }
 
@@ -44,70 +48,83 @@ public partial class Protagonista : CharacterBody2D
     {
         float deltaF = (float)delta;
 
-        // Cooldown del dash
-        dashCooldownTimer -= deltaF;
-
-        // DASH
-        if (dashing)
+        if (!muerto)
         {
-            velocity.X = direccionDash * DashSpeed;
-            velocity.Y = 0;
-            dashTimer -= deltaF;
-            hurtbox.Disabled = true;
 
-            if (dashTimer <= 0)
+
+            // Cooldown del dash
+            dashCooldownTimer -= deltaF;
+
+            // DASH
+            if (dashing)
             {
-                dashing = false;
-                hurtbox.Disabled = false;
-                animación();
+                velocity.X = direccionDash * DashSpeed;
+                velocity.Y = 0;
+                dashTimer -= deltaF;
+                hurtbox.Disabled = true;
+
+                if (dashTimer <= 0)
+                {
+                    dashing = false;
+                    hurtbox.Disabled = false;
+                    animación();
+                }
+
+                Velocity = velocity;
+                MoveAndSlide();
+                return;
             }
+
+            GD.Print(Position.Y);
+
+            //Condicion de muerte por caida
+            if (Position.Y > 700)
+            {
+                death();
+            }
+
+            // Gravedad y salto
+            if (!IsOnFloor())
+            {
+                velocity.Y += Gravity * deltaF;
+            }
+            else if (Input.IsActionJustPressed("salto"))
+            {
+                velocity.Y = JumpVelocity;
+            }
+
+            // Movimiento horizontal
+            float direccion = Input.GetActionStrength("derecha") - Input.GetActionStrength("izquierda");
+            velocity.X = direccion * speed;
 
             Velocity = velocity;
             MoveAndSlide();
-            return;
-        }
+            velocity = Velocity;
 
-        // Gravedad y salto
-        if (!IsOnFloor())
-        {
-            velocity.Y += Gravity * deltaF;
-        }
-        else if (Input.IsActionJustPressed("salto"))
-        {
-            velocity.Y = JumpVelocity;
-        }
+            animación();
 
-        // Movimiento horizontal
-        float direccion = Input.GetActionStrength("derecha") - Input.GetActionStrength("izquierda");
-        velocity.X = direccion * speed;
+            // ATAQUE
+            if (Input.IsActionJustPressed("atacar") && !atacando)
+            {
+                sprite.Play("atacar");
+                atacando = true;
 
-        Velocity = velocity;
-        MoveAndSlide();
-        velocity = Velocity;
+                if (hitboxataque != null)
+                    hitboxataque.Monitoring = true;
 
-        animación();
+                if (ataque_espada != null)
+                    ataque_espada.Disabled = false;
+            }
 
-        // ATAQUE
-        if (Input.IsActionJustPressed("atacar") && !atacando)
-        {
-            sprite.Play("atacar");
-            atacando = true;
-
-            if (hitboxataque != null)
-                hitboxataque.Monitoring = true;
-
-            if (ataque_espada != null)
-                ataque_espada.Disabled = false;
-        }
-
-        // DASH (con cooldown)
-        if (Input.IsActionJustPressed("dash") && !atacando && !dashing && dashCooldownTimer <= 0f)
-        {
-            dashing = true;
-            dashTimer = DashDuration;
-            dashCooldownTimer = DashCooldown; // Reiniciar cooldown
-            direccionDash = sprite.Scale.X > 0 ? 1 : -1;
-            sprite.Play("dash");
+            // DASH (con cooldown)
+            if (Input.IsActionJustPressed("dash") && !atacando && !dashing && dashCooldownTimer <= 0f)
+            {
+                dashing = true;
+                dashTimer = DashDuration;
+                dashCooldownTimer = DashCooldown; // Reiniciar cooldown
+                direccionDash = sprite.Scale.X > 0 ? 1 : -1;
+                sprite.Play("dash");
+            }
         }
     }
 
@@ -133,7 +150,7 @@ public partial class Protagonista : CharacterBody2D
 
     private void animación()
     {
-        if (atacando || dashing) return;
+        if (atacando || dashing || muerto) return;
 
         float direccion = Input.GetActionStrength("derecha") - Input.GetActionStrength("izquierda");
 
@@ -170,26 +187,31 @@ public partial class Protagonista : CharacterBody2D
     {
         if (body.IsInGroup("Enemigo"))
         {
-           ((Skeleton)body).damaged();
+            ((Skeleton)body).damaged();
         }
     }
 
     public async void damaged()
     {
-        GD.Print("vida"+vida);
+        if (dañado || muerto) return;
+        dañado = true;
         vida--;
+        GD.Print(vida);
         if (vida <= 0)
         {
             death();
         }
-        sprite.Play("dañado");
-        await ToSignal(sprite, "animation_finished");
+        // sprite.Play("dañado");
+        // await ToSignal(sprite, "animation_finished");
+        dañado = false;
     }
 
     private async void death()
     {
+        hurtbox.Disabled = true;
+        muerto = true;
         sprite.Play("muerto");
         await ToSignal(sprite, "animation_finished");
-        // GetTree().ReloadCurrentScene();
+        GetTree().ReloadCurrentScene();
     }
 }

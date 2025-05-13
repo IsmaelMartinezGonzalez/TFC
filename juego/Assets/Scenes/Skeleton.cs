@@ -14,6 +14,7 @@ public partial class Skeleton : CharacterBody2D
 
     private bool muerto = false;
     private bool ocupado = false;
+    private bool atacando = false;
 
     private bool jugadorDentro = false;
     private int vida = 2;
@@ -26,36 +27,22 @@ public partial class Skeleton : CharacterBody2D
 
     public override void _Ready()
     {
-        if (hitbox != null)
-        {
-            hitbox.Disabled = true;
-        }
         hitboxArea.BodyEntered += _on_hitbox_body_entered;
-        hitboxArea.BodyEntered += _on_hitbox_body_exited;
+        hitboxArea.BodyExited += _on_hitbox_body_exited;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         float deltaF = (float)delta;
 
-        if (muerto)
+        // Pausar comportamiento mientras ataca
+        if (ocupado || muerto)
         {
             velocity = Vector2.Zero;
             Velocity = velocity;
             MoveAndSlide();
-            if (sprite != null && sprite.Animation != "death")
-                sprite.Play("death");
             return;
         }
-
-        if (ocupado)
-        {
-            velocity = Vector2.Zero;
-            Velocity = velocity;
-            MoveAndSlide();
-            return; // Pausar comportamiento mientras se daña
-        }
-
         // Aplicar gravedad
         if (!IsOnFloor())
         {
@@ -65,106 +52,105 @@ public partial class Skeleton : CharacterBody2D
         {
             velocity.Y = 0;
         }
+        // Moviemiento del esqueleto
+        Vector2 movimiento = direccionPatrulla * velocidad;
+        velocity.X = movimiento.X;
+        distanciaRecorrida += Math.Abs(velocity.X * deltaF);
 
-        if (!jugadorEnRango)
+        //Si la distancia recorrida supero la distancia de patrulla, cambia la direccion y empieza de 0
+        if (distanciaRecorrida >= distanciaPatrulla)
         {
-            // Patrulla
-            Vector2 movimiento = direccionPatrulla * velocidad;
-            velocity.X = movimiento.X;
-            distanciaRecorrida += Math.Abs(velocity.X * deltaF);
+            direccionPatrulla *= -1;
+            distanciaRecorrida = 0.0f;
+        }
+        estado("correr", this);
+        //Voltea el sprite del esqueleto
+        sprite.FlipH = direccionPatrulla.X < 0;
 
-            if (distanciaRecorrida >= distanciaPatrulla)
-            {
-                direccionPatrulla *= -1;
-                distanciaRecorrida = 0.0f;
-            }
-
-            if (sprite != null)
-            {
-                sprite.Play("correr");
-                sprite.FlipH = direccionPatrulla.X < 0;
-            }
-
-            // if (direccionPatrulla.X < 0)
-            //     hitbox.Position = new Vector2( hitbox.Position.Y -5, hitbox.Position.Y);
-            // else
-            //     hitbox.Position = new Vector2( hitbox.Position.X + 5, hitbox.Position.Y);
-
-            if (hitbox != null)
-                hitbox.Disabled = false;
+        // Cambio de direccion de la hitbox del esqueleto
+        if (direccionPatrulla.X < 0)
+        {
+            hitbox.Position = new Vector2(hurtbox.Position.X - 10, hitbox.Position.Y);
         }
         else
         {
-            velocity.X = 0;
-
-            if (sprite != null)
-                sprite.Play("atacar");
-
-            if (hitbox != null)
-                hitbox.Disabled = false;
+            hitbox.Position = new Vector2(hurtbox.Position.X + 10, hitbox.Position.Y);
         }
-
         Velocity = velocity;
         MoveAndSlide();
     }
 
     private async void death()
     {
-        if (muerto) return;
-        muerto = true;
-        hitbox.Disabled = true;
-        hitboxArea.Monitoring = false;
-        hurtbox.Disabled = true;
-        sprite.Play("death");
-        await ToSignal(sprite, "animation_finished");
-        QueueFree();
+        estado("death", this);
     }
-
     public async void damaged()
     {
-        if (ocupado || muerto) return; // Evita dañar si ya está en ese estado
-        vida--;
-        ocupado = true;
-
+        estado("dañado", this);
         if (vida <= 0)
         {
             death();
         }
-        else
-        {
-            sprite.Play("damaged");
-            await ToSignal(sprite, "animation_finished");
-            ocupado = false; // Reanudar comportamiento
-        }
     }
-
     private async void _on_hitbox_body_entered(Node body)
     {
         if (body.IsInGroup("Jugador"))
         {
             jugadorDentro = true;
             ocupado = true;
-            sprite.Play("atacar");
-            await ToSignal(sprite, "animation_finished");
-
-            GD.Print(jugadorDentro);
-
-            // if (jugadorDentro)
-            // {
-                ((Protagonista)body).damaged();
-            // }
-
-            ocupado = false;
+            estado("atacar", body);
+            if (jugadorDentro)
+            {
+                // ((Protagonista)body).damaged();
+            }
         }
     }
-
     private void _on_hitbox_body_exited(Node body)
     {
         if (body.IsInGroup("Jugador"))
         {
-            GD.Print("chao");
+            GD.Print("salir del area");
             jugadorDentro = false;
         }
     }
-
+    private async void estado(string cmd, Node body)
+    {
+        switch (cmd)
+        {
+            case "atacar":
+                if (muerto) return;
+                ocupado = true;
+                velocity.X = 0;
+                sprite.Play("atacar");
+                await ToSignal(sprite, "animation_finished");
+                if (jugadorDentro)
+                {
+                    ((Protagonista)body).damaged();
+                }
+                ocupado = false;
+                break;
+            case "correr":
+                if (ocupado || muerto) return;
+                sprite.Play("correr");
+                break;
+            case "dañado":
+                if (ocupado || muerto) return;
+                hitbox.Disabled = false;
+                vida--;
+                ocupado = true;
+                sprite.Play("damaged");
+                await ToSignal(sprite, "animation_finished");
+                ocupado = false;
+                hitbox.Disabled = true;
+                break;
+            case "death":
+                muerto = true;
+                hurtbox.Disabled = true;
+                hitbox.Disabled = true;
+                sprite.Play("death");
+                await ToSignal(sprite, "animation_finished");
+                QueueFree();
+                break;
+        }
+    }
 }

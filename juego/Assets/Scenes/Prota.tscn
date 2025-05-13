@@ -395,16 +395,17 @@ hurtbox = NodePath("hurtbox")
 texture_filter = 1
 position = Vector2(-18, -1)
 sprite_frames = SubResource("SpriteFrames_8x2tq")
-animation = &"muerto"
-frame = 9
+animation = &"dañado"
+frame = 1
 frame_progress = 1.0
-speed_scale = 2.0
+speed_scale = 1.5
 
 [node name="hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(-23, 0)
 shape = SubResource("RectangleShape2D_aujps")
 
 [node name="hitboxAtaque" type="Area2D" parent="." groups=["ataque_espada"]]
+collision_mask = 3
 script = ExtResource("8_jc3h2")
 
 [node name="ataque_espada" type="CollisionShape2D" parent="hitboxAtaque"]

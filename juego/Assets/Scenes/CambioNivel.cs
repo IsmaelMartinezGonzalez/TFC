@@ -7,7 +7,7 @@ public partial class CambioNivel : Area2D
     {
         if (body.IsInGroup("Jugador")) // Asegúrate de que el jugador esté en este grupo
         {
-            GetTree().ChangeSceneToFile("C:\\Users\\ismae\\Desktop\\TFC\\juego\\Assets\\Scenes\\Lvl2.tscn");
+            GetTree().ChangeSceneToFile("res://Assets/Scenes/Lvl2.tscn");
         }
     }
 }

@@ -1871,7 +1871,8 @@ texture = ExtResource("4_grgyy")
 13:51/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_krkd6"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 255
+physics_layer_0/collision_mask = 255
 sources/0 = SubResource("TileSetAtlasSource_sykfy")
 sources/1 = SubResource("TileSetAtlasSource_gxlva")
 
@@ -2782,7 +2783,8 @@ texture = ExtResource("6_v2w4x")
 19:11/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_4k2q7"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 255
+physics_layer_0/collision_mask = 255
 sources/5 = SubResource("TileSetAtlasSource_xrsc7")
 sources/4 = SubResource("TileSetAtlasSource_0fbk8")
 sources/3 = SubResource("TileSetAtlasSource_etuyi")
@@ -2822,6 +2824,8 @@ layer_0/tile_data = PackedInt32Array(1966102, 196608, 1, 1966103, 196608, 1, 196
 layer_1/name = "Layer1"
 
 [node name="CambioNivel" type="Area2D" parent="LevelManager/Nvl1"]
+collision_layer = 255
+collision_mask = 255
 script = ExtResource("9_6u7a1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelManager/Nvl1/CambioNivel"]
@@ -2829,7 +2833,7 @@ position = Vector2(1269, 413.5)
 shape = SubResource("RectangleShape2D_krkd6")
 
 [node name="Prota" parent="LevelManager" groups=["Jugador"] instance=ExtResource("1_ob0po")]
-position = Vector2(132, 345)
+position = Vector2(115, 346)
 speed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="LevelManager/Prota"]
@@ -2837,10 +2841,10 @@ position = Vector2(-6, 23)
 zoom = Vector2(2, 2)
 
 [node name="Skeleton" parent="LevelManager" groups=["Enemigo"] instance=ExtResource("15_0fbk8")]
-position = Vector2(-79, -3)
+position = Vector2(-72, -5)
 
 [node name="Skeleton2" parent="LevelManager" groups=["Enemigo"] instance=ExtResource("15_0fbk8")]
-position = Vector2(673, -68)
+position = Vector2(684, -64)
 distanciaPatrulla = 100.0
 
 [connection signal="body_entered" from="LevelManager/Nvl1/CambioNivel" to="LevelManager/Nvl1/CambioNivel" method="_on_cambioNivel_body_entered"]
