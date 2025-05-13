@@ -37,10 +37,18 @@
 ### ✅ 12 de mayo
 - Se añadieron sensores de ataque, ahora el enemigo tiene vida y tiene animación de muerte, así como muerte funcional y recibe daño del jugador solo cuando ataca con la hitbox.
 
+### ✅ 13 de mayo
+- Se ha ajustado bien la hitbox al esqueleto
+- Se ha hecho q no tenga hitbox con el personaje pero que si que le pegue, y haciendo que solo la hitbox del personaje colisiones con los enemigos
+- Se ha arreglado rutas
+- Se ha mejorado el código del esqueleto, en cuento a orden y estructura. Tambien se ha comentado
+- Ahora el esqueleto detecta bien si el protagonista entra o sale de la hitbox y solo le ataca cuando esta dentro de esta
+- Arreglo del protagonista si se va fuera del mapa
+- El nivel se reinicia si el jugador muere, tambien se arreglo el gestor de estados del protagonista
+
 ---
 
 ### 🔜 Próximos pasos
-- Se tiene pensado hacer que el enemigo ataque al jugador y este muera.
 - Conforme al proyecto final, se tiene pensado añadir 2-3 tipos más de enemigos para cada nivel.
 - Un HUD simple de vidas para el protagonista.
 - Una pantalla para el *Game Over* que solo te deje empezar desde el primer nivel.
