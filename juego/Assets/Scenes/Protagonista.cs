@@ -7,9 +7,10 @@ public partial class Protagonista : CharacterBody2D
     [Export] public AnimatedSprite2D sprite;
     [Export] public float Gravity = 1200f;
     [Export] public float JumpVelocity = -400f;
-
     [Export] public Area2D hitboxataque; // Área de ataque (padre de ataque_espada)
     [Export] public CollisionShape2D ataque_espada; // Forma de la hitbox
+    [Export] public CanvasLayer hud; //Hud de vida
+    [Export] public CanvasLayer gameOver; //Pantalla de gameOver
     [Export] public CollisionShape2D hurtbox; // Hitbox de recibir daño
 
     [Export] public float DashSpeed = 400f;
@@ -18,7 +19,7 @@ public partial class Protagonista : CharacterBody2D
 
     private Vector2 velocity = Vector2.Zero;
     private bool atacando = false;
-    private int vida = 4;
+    private int vida = 3;
     private bool dañado = false;
     private bool muerto = false;
     private bool dashing = false;
@@ -75,12 +76,10 @@ public partial class Protagonista : CharacterBody2D
                 return;
             }
 
-            GD.Print(Position.Y);
-
             //Condicion de muerte por caida
             if (Position.Y > 700)
             {
-                death();
+                muerte();
             }
 
             // Gravedad y salto
@@ -187,31 +186,38 @@ public partial class Protagonista : CharacterBody2D
     {
         if (body.IsInGroup("Enemigo"))
         {
-            ((Skeleton)body).damaged();
+            switch (body.Name)
+            {
+                case "Skeleton":
+                    ((Skeleton)body).daño();
+                    break;
+                case "Mushroom":
+                    ((Mushroom)body).daño();
+                    break;
+            }
         }
     }
 
-    public async void damaged()
+    public async void daño()
     {
         if (dañado || muerto) return;
         dañado = true;
         vida--;
-        GD.Print(vida);
+        ((Hud)hud).quitarVida();
         if (vida <= 0)
         {
-            death();
+            muerte();
         }
-        // sprite.Play("dañado");
-        // await ToSignal(sprite, "animation_finished");
         dañado = false;
     }
 
-    private async void death()
+    private async void muerte()
     {
         hurtbox.Disabled = true;
         muerto = true;
         sprite.Play("muerto");
         await ToSignal(sprite, "animation_finished");
-        GetTree().ReloadCurrentScene();
+        GD.Print("muerte");
+        ((GameOver)gameOver).mostrar();
     }
 }

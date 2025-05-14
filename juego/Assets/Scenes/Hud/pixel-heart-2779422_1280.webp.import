@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnugtyosbu77f"
-path="res://.godot/imported/Skeleton Attack.png-49334ad74099860097516ebfbf8b3bee.ctex"
+uid="uid://d3wsejg0s3y8d"
+path="res://.godot/imported/pixel-heart-2779422_1280.webp-d1c5022aa4c1ea03e6a0f59d49fe9cc9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/enemies/Skeleton/Sprite Sheets/Skeleton Attack.png"
-dest_files=["res://.godot/imported/Skeleton Attack.png-49334ad74099860097516ebfbf8b3bee.ctex"]
+source_file="res://Assets/Scenes/Hud/pixel-heart-2779422_1280.webp"
+dest_files=["res://.godot/imported/pixel-heart-2779422_1280.webp-d1c5022aa4c1ea03e6a0f59d49fe9cc9.ctex"]
 
 [params]
 

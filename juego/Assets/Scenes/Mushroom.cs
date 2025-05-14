@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
-public partial class Skeleton : CharacterBody2D
+public partial class Mushroom : CharacterBody2D
 {
     [Export] public AnimatedSprite2D sprite;
     [Export] public float Gravity = 1200f;
@@ -65,7 +65,7 @@ public partial class Skeleton : CharacterBody2D
         }
         estado("correr", this);
         //Voltea el sprite del esqueleto
-        sprite.FlipH = direccionPatrulla.X < 0;
+        sprite.FlipH = direccionPatrulla.X > 0;
 
         // Cambio de direccion de la hitbox del esqueleto
         if (direccionPatrulla.X < 0)
@@ -96,6 +96,7 @@ public partial class Skeleton : CharacterBody2D
     {
         if (body.IsInGroup("Jugador"))
         {
+            GD.Print("dentro");
             jugadorDentro = true;
             ocupado = true;
             estado("atacar", body);
@@ -105,6 +106,7 @@ public partial class Skeleton : CharacterBody2D
     {
         if (body.IsInGroup("Jugador"))
         {
+            GD.Print("salir del area");
             jugadorDentro = false;
         }
     }

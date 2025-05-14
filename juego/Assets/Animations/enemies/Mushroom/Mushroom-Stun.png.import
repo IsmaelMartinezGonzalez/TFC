@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnugtyosbu77f"
-path="res://.godot/imported/Skeleton Attack.png-49334ad74099860097516ebfbf8b3bee.ctex"
+uid="uid://b2kd05uldhsp8"
+path="res://.godot/imported/Mushroom-Stun.png-3f246c411d98e86dfb6885acc30feeb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/enemies/Skeleton/Sprite Sheets/Skeleton Attack.png"
-dest_files=["res://.godot/imported/Skeleton Attack.png-49334ad74099860097516ebfbf8b3bee.ctex"]
+source_file="res://Assets/Animations/enemies/Mushroom/Mushroom-Stun.png"
+dest_files=["res://.godot/imported/Mushroom-Stun.png-3f246c411d98e86dfb6885acc30feeb0.ctex"]
 
 [params]
 

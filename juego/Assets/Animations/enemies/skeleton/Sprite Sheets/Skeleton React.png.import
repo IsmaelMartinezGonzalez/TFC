@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cikg7mmgdenx2"
-path="res://.godot/imported/Skeleton React.png-2f066d6a9790a417f2ae16ca7cc06ec6.ctex"
+path="res://.godot/imported/Skeleton React.png-5e877bf2410edfb700a12a8b729e386c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/enemies/skeleton/Sprite Sheets/Skeleton React.png"
-dest_files=["res://.godot/imported/Skeleton React.png-2f066d6a9790a417f2ae16ca7cc06ec6.ctex"]
+source_file="res://Assets/Animations/enemies/Skeleton/Sprite Sheets/Skeleton React.png"
+dest_files=["res://.godot/imported/Skeleton React.png-5e877bf2410edfb700a12a8b729e386c.ctex"]
 
 [params]
 

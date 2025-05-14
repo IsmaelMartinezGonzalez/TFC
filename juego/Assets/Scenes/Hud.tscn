@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdxxj1bmf241o"]
+
+[ext_resource type="Script" uid="uid://b8mx0vrei3c5b" path="res://Assets/Scenes/Hud.cs" id="1_cqlqq"]
+[ext_resource type="Texture2D" uid="uid://d3wsejg0s3y8d" path="res://Assets/Scenes/Hud/pixel-heart-2779422_1280.webp" id="2_dfp7b"]
+
+[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("vida1", "vida2", "vida3")]
+script = ExtResource("1_cqlqq")
+vida1 = NodePath("Panel/Corazon1")
+vida2 = NodePath("Panel/Corazon2")
+vida3 = NodePath("Panel/Corazon3")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 1.0
+offset_right = 124.0
+offset_bottom = 40.0
+
+[node name="Corazon1" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 40.0
+texture = ExtResource("2_dfp7b")
+expand_mode = 1
+
+[node name="Corazon2" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 82.0
+offset_bottom = 40.0
+texture = ExtResource("2_dfp7b")
+expand_mode = 1
+
+[node name="Corazon3" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 122.0
+offset_bottom = 40.0
+texture = ExtResource("2_dfp7b")
+expand_mode = 1

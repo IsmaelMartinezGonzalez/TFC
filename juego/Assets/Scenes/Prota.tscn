@@ -1,6 +1,6 @@
 [gd_scene load_steps=60 format=3 uid="uid://bbfs8lpilvliw"]
 
-[ext_resource type="Script" uid="uid://kax64bmef48a" path="res://Scripts/Protagonista.cs" id="1_pqk5i"]
+[ext_resource type="Script" uid="uid://kax64bmef48a" path="res://Assets/Scenes/Protagonista.cs" id="1_pqk5i"]
 [ext_resource type="Texture2D" uid="uid://bownakqt2dlcg" path="res://Assets/Animations/player/_Attack2.png" id="2_8afkc"]
 [ext_resource type="Texture2D" uid="uid://bxlp6kpqj1bg" path="res://Assets/Animations/player/_Fall.png" id="3_jc3h2"]
 [ext_resource type="Texture2D" uid="uid://bqrpbjewqxo4c" path="res://Assets/Animations/player/_Run.png" id="4_3rlkg"]
@@ -411,6 +411,10 @@ script = ExtResource("8_jc3h2")
 [node name="ataque_espada" type="CollisionShape2D" parent="hitboxAtaque"]
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_w5j33")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -1)
+zoom = Vector2(2, 2)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="acabar_Ataque"]
 [connection signal="body_entered" from="hitboxAtaque" to="." method="_on_hitbox_ataque_body_entered"]

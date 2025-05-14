@@ -2082,7 +2082,7 @@ shape = SubResource("RectangleShape2D_uqk0d")
 position = Vector2(-646, 364)
 speed = 100.0
 
-[node name="Camera2D" type="Camera2D" parent="Prota"]
+[node name="Camera2D2" type="Camera2D" parent="Prota"]
 position = Vector2(-6, 23)
 zoom = Vector2(2, 2)
 
