@@ -50,7 +50,6 @@
 - Se añadio un hud simple de 3 vidas para el jugador
 - Se añadio un nuevo enemigo, LA SETA
 - Se añadio una pantalla de gameOver simple
----
 
 ### ✅ 15 de mayo
 -Se añadio un enemigo mas, el golem
@@ -58,6 +57,7 @@
 -Ahora el esqueleto tiene 3 vidas y el golem 5, el esqueleto ahora revive a los 3 segundos
 -Se añadio una winScreen
 
+---
 ### 🔜 Próximos pasos
 - Conforme al proyecto final, se tiene pensado añadir 2-3 tipos más de enemigos para cada nivel.
 - Un HUD simple de vidas para el protagonista.
