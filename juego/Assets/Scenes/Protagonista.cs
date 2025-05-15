@@ -62,12 +62,12 @@ public partial class Protagonista : CharacterBody2D
                 velocity.X = direccionDash * DashSpeed;
                 velocity.Y = 0;
                 dashTimer -= deltaF;
-                hurtbox.Disabled = true;
+                CollisionMask = 5;
 
                 if (dashTimer <= 0)
                 {
+                    CollisionMask = 1;
                     dashing = false;
-                    hurtbox.Disabled = false;
                     animación();
                 }
 
@@ -184,17 +184,17 @@ public partial class Protagonista : CharacterBody2D
 
     private void _on_hitbox_ataque_body_entered(Node body)
     {
-        if (body.IsInGroup("Enemigo"))
+        if (body.IsInGroup("Mushroom"))
         {
-            switch (body.Name)
-            {
-                case "Skeleton":
-                    ((Skeleton)body).daño();
-                    break;
-                case "Mushroom":
-                    ((Mushroom)body).daño();
-                    break;
-            }
+            ((Mushroom)body).daño();
+        }
+        if (body.IsInGroup("Golem"))
+        {
+            ((Golem)body).daño();
+        }
+        if (body.IsInGroup("Skeleton"))
+        {
+            ((Skeleton)body).daño();
         }
     }
 
@@ -209,6 +209,7 @@ public partial class Protagonista : CharacterBody2D
             muerte();
         }
         dañado = false;
+        GD.Print(dañado);
     }
 
     private async void muerte()

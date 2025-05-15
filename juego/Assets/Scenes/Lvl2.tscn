@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bl1yju10bdvl6"]
+[gd_scene load_steps=22 format=3 uid="uid://bl1yju10bdvl6"]
 
 [ext_resource type="Script" uid="uid://omajwlv0ncw5" path="res://Assets/Scenes/Lvl2.cs" id="1_clxx7"]
 [ext_resource type="Texture2D" uid="uid://b5fxe3h035dxp" path="res://Assets/Scenary/Lvl2/Enviroment.png" id="2_pj1qb"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://b6yk3xuycqb2l" path="res://Assets/Scenary/Lvl3/spr_torch.png" id="5_g56aj"]
 [ext_resource type="Script" uid="uid://ct51a4aabhgaa" path="res://Assets/Scenes/CambioNivel2.cs" id="6_g56aj"]
 [ext_resource type="PackedScene" uid="uid://bbfs8lpilvliw" path="res://Assets/Scenes/Prota.tscn" id="6_iu777"]
+[ext_resource type="PackedScene" uid="uid://6blnfv8v7cda" path="res://Assets/Scenes/Golem.tscn" id="7_kqwpb"]
+[ext_resource type="PackedScene" uid="uid://cdxxj1bmf241o" path="res://Assets/Scenes/Hud.tscn" id="9_ijkxk"]
+[ext_resource type="PackedScene" uid="uid://bsojunysqjcil" path="res://Assets/Scenes/GameOver.tscn" id="10_r1j3r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kqwpb"]
 texture = ExtResource("2_pj1qb")
@@ -1857,7 +1860,8 @@ texture = ExtResource("3_xpq3b")
 13:51/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_r1j3r"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 255
+physics_layer_0/collision_mask = 255
 sources/0 = SubResource("TileSetAtlasSource_kqwpb")
 sources/1 = SubResource("TileSetAtlasSource_ijkxk")
 
@@ -4317,12 +4321,23 @@ position = Vector2(-640, 366)
 shape = SubResource("RectangleShape2D_hvmhx")
 one_way_collision_margin = 51.7
 
-[node name="Prota" parent="." groups=["Jugador"] instance=ExtResource("6_iu777")]
-position = Vector2(-2321, 455)
-speed = 100.0
+[node name="Golem" parent="Nivel2" groups=["Golem"] instance=ExtResource("7_kqwpb")]
+position = Vector2(-1746, 377)
+velocidad = 60.0
 
-[node name="Camera2D2" type="Camera2D" parent="Prota"]
-position = Vector2(-6, 23)
-zoom = Vector2(2, 2)
+[node name="Golem2" parent="Nivel2" groups=["Golem"] instance=ExtResource("7_kqwpb")]
+position = Vector2(-1442, 335)
+velocidad = 60.0
+distanciaPatrulla = 350.0
+
+[node name="Prota" parent="Nivel2" node_paths=PackedStringArray("hud", "gameOver") groups=["Jugador"] instance=ExtResource("6_iu777")]
+position = Vector2(-2351, 454)
+speed = 100.0
+hud = NodePath("../../Hud")
+gameOver = NodePath("../../GameOver")
+
+[node name="Hud" parent="." instance=ExtResource("9_ijkxk")]
+
+[node name="GameOver" parent="." instance=ExtResource("10_r1j3r")]
 
 [connection signal="body_entered" from="Nivel2/CambioNivel2" to="." method="_on_cambio_nivel_2_body_entered"]

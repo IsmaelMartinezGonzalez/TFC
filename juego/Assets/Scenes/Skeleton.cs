@@ -10,6 +10,7 @@ public partial class Skeleton : CharacterBody2D
     [Export] public Area2D hitboxArea;
     [Export] public CollisionShape2D hurtbox;
     [Export] public float velocidad = 100.0f;
+    [Export] public Timer tRevivir;
     [Export] public float distanciaPatrulla = 200.0f;
 
     private bool muerto = false;
@@ -17,7 +18,7 @@ public partial class Skeleton : CharacterBody2D
     private bool atacando = false;
 
     private bool jugadorDentro = false;
-    private int vida = 2;
+    private int vida = 3;
 
     private Vector2 direccionPatrulla = Vector2.Right;
     private float distanciaRecorrida = 0.0f;
@@ -83,6 +84,12 @@ public partial class Skeleton : CharacterBody2D
     private async void muerte()
     {
         estado("muerto", this);
+        tRevivir.Start();
+        await ToSignal(tRevivir, "timeout");
+        vida = 3;
+        sprite.Play("revivir");
+        await ToSignal(sprite, "animation_finished");
+        muerto = false;
     }
     public async void daño()
     {
@@ -133,6 +140,7 @@ public partial class Skeleton : CharacterBody2D
                 vida--;
                 ocupado = true;
                 sprite.Play("dañado");
+                GD.Print("Au");
                 await ToSignal(sprite, "animation_finished");
                 ocupado = false;
                 break;
@@ -141,8 +149,6 @@ public partial class Skeleton : CharacterBody2D
                 hurtbox.Disabled = true;
                 hitbox.Disabled = true;
                 sprite.Play("muerto");
-                await ToSignal(sprite, "animation_finished");
-                QueueFree();
                 break;
         }
     }

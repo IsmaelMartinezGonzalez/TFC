@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bpj8ksu0o61je"]
+[gd_scene load_steps=26 format=3 uid="uid://bpj8ksu0o61je"]
 
 [ext_resource type="Texture2D" uid="uid://b5fxe3h035dxp" path="res://Assets/Scenary/Lvl2/Enviroment.png" id="1_jjlit"]
 [ext_resource type="PackedScene" uid="uid://bbfs8lpilvliw" path="res://Assets/Scenes/Prota.tscn" id="1_ob0po"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bjoeh6urnhrvy" path="res://Assets/Scenes/Mushroom.tscn" id="12_grgyy"]
 [ext_resource type="PackedScene" uid="uid://cdxxj1bmf241o" path="res://Assets/Scenes/Hud.tscn" id="12_sptfd"]
 [ext_resource type="PackedScene" uid="uid://bsojunysqjcil" path="res://Assets/Scenes/GameOver.tscn" id="14_etuyi"]
-[ext_resource type="PackedScene" uid="uid://bx8aq0o4i0f4k" path="res://Assets/Scenes/Skeleton.tscn" id="15_0fbk8"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_ob0po"]
 script/source = "using Godot;
@@ -2803,7 +2802,6 @@ script = SubResource("CSharpScript_ob0po")
 [node name="Nvl1" type="Node2D" parent="."]
 
 [node name="Fondo" type="Sprite2D" parent="Nvl1"]
-visible = false
 z_index = -1
 position = Vector2(628, 335)
 scale = Vector2(6.09844, 4.16146)
@@ -2833,20 +2831,17 @@ position = Vector2(1269, 413.5)
 shape = SubResource("RectangleShape2D_krkd6")
 
 [node name="Prota" parent="Nvl1" node_paths=PackedStringArray("hud", "gameOver") groups=["Jugador"] instance=ExtResource("1_ob0po")]
-position = Vector2(115, 346)
+position = Vector2(116, 347)
 speed = 100.0
 hud = NodePath("../../Hud")
 gameOver = NodePath("../../GameOver")
 
-[node name="Skeleton" parent="Nvl1" groups=["Enemigo"] instance=ExtResource("15_0fbk8")]
-position = Vector2(254, -33)
+[node name="Mushroom" parent="Nvl1" groups=["Mushroom"] instance=ExtResource("12_grgyy")]
+position = Vector2(300, 445)
 
-[node name="Skeleton2" parent="Nvl1" groups=["Enemigo"] instance=ExtResource("15_0fbk8")]
-position = Vector2(684, -64)
+[node name="Mushroom2" parent="Nvl1" groups=["Mushroom"] instance=ExtResource("12_grgyy")]
+position = Vector2(1053, 381)
 distanciaPatrulla = 100.0
-
-[node name="Mushroom" parent="Nvl1" groups=["Enemigo"] instance=ExtResource("12_grgyy")]
-position = Vector2(303, 442)
 
 [node name="Hud" parent="." instance=ExtResource("12_sptfd")]
 

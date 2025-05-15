@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsojunysqjcil"]
+[gd_scene load_steps=5 format=3 uid="uid://bsojunysqjcil"]
 
 [ext_resource type="Script" uid="uid://b64a53jwaec1" path="res://Assets/Scenes/GameOver.cs" id="1_gyo7c"]
+[ext_resource type="Texture2D" uid="uid://ctmgw788pb5pt" path="res://Assets/Animations/Menu/BotonReset.png" id="2_8afkq"]
+[ext_resource type="Texture2D" uid="uid://bpmlmg6u7cmgo" path="res://Assets/Animations/Menu/Fondo menu.png" id="2_ds0ac"]
+[ext_resource type="Texture2D" uid="uid://burod33s2370c" path="res://Assets/Animations/Menu/BotonExit.png" id="3_vqw4q"]
 
 [node name="GameOver" type="CanvasLayer" node_paths=PackedStringArray("botonReinicio", "botonSalir")]
 visible = false
@@ -9,27 +12,52 @@ botonReinicio = NodePath("Button")
 botonSalir = NodePath("ButtonSalir")
 
 [node name="Button" type="Button" parent="."]
-offset_left = -3.0
-offset_top = 328.0
-offset_right = 1147.0
-offset_bottom = 497.0
-text = "Reiniciar
+offset_left = 327.0
+offset_top = 401.0
+offset_right = 833.0
+offset_bottom = 563.0
+text = "
+
 "
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -3.0
+offset_right = 502.0
+offset_bottom = 163.0
+texture = ExtResource("2_8afkq")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -3.0
-offset_top = -5.0
-offset_right = 910.0
-offset_bottom = 179.0
+offset_left = 96.0
+offset_top = 2.0
+offset_right = 1009.0
+offset_bottom = 186.0
 text = "Fin
 "
 
 [node name="ButtonSalir" type="Button" parent="."]
-offset_left = 1.0
-offset_top = 167.0
-offset_right = 1149.0
-offset_bottom = 288.0
-text = "Salir"
+offset_left = 327.0
+offset_top = 172.0
+offset_right = 839.0
+offset_bottom = 343.0
+text = "
+"
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="ButtonSalir"]
+layout_mode = 0
+offset_right = 517.0
+offset_bottom = 169.0
+texture = ExtResource("3_vqw4q")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+offset_right = 1140.0
+offset_bottom = 665.0
+mouse_filter = 2
+texture = ExtResource("2_ds0ac")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ButtonSalir" to="." method="_on_button_salir_pressed"]

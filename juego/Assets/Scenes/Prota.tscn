@@ -380,7 +380,7 @@ animations = [{
 size = Vector2(17, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w5j33"]
-size = Vector2(44, 20)
+size = Vector2(57, 20)
 
 [node name="Prota" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitboxataque", "ataque_espada", "hurtbox")]
 position = Vector2(3, -1)
@@ -409,7 +409,7 @@ collision_mask = 3
 script = ExtResource("8_jc3h2")
 
 [node name="ataque_espada" type="CollisionShape2D" parent="hitboxAtaque"]
-position = Vector2(6, 0)
+position = Vector2(12.5, 0)
 shape = SubResource("RectangleShape2D_w5j33")
 
 [node name="Camera2D" type="Camera2D" parent="."]

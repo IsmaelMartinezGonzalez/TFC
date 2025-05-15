@@ -4,6 +4,8 @@ using System;
 public partial class FinJuego : Area2D
 {
 
+    [Export] public CanvasLayer winScreen;
+
     public override void _Ready()
     {
         this.BodyEntered += _on_fin_juego_body_entered;
@@ -12,7 +14,7 @@ public partial class FinJuego : Area2D
     {
         if (body.IsInGroup("Jugador"))
         {
-            GetTree().Quit();
+            winScreen.Visible = true;
         }
     }
 
