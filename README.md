@@ -46,6 +46,10 @@
 - Arreglo del protagonista si se va fuera del mapa
 - El nivel se reinicia si el jugador muere, tambien se arreglo el gestor de estados del protagonista
 
+### ✅ 14 de mayo
+- Se añadio un hud simple de 3 vidas para el jugador
+- Se añadio un nuevo enemigo, LA SETA
+- Se añadio una pantalla de gameOver simple
 ---
 
 ### 🔜 Próximos pasos
