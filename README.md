@@ -52,10 +52,10 @@
 - Se añadio una pantalla de gameOver simple
 
 ### ✅ 15 de mayo
--Se añadio un enemigo mas, el golem
--Se mejoro del gameOver screen
--Ahora el esqueleto tiene 3 vidas y el golem 5, el esqueleto ahora revive a los 3 segundos
--Se añadio una winScreen
+- Se añadio un enemigo mas, el golem
+- Se mejoro del gameOver screen
+- Ahora el esqueleto tiene 3 vidas y el golem 5, el esqueleto ahora revive a los 3 segundos
+- Se añadio una winScreen
 
 ---
 ### 🔜 Próximos pasos
