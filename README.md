@@ -57,11 +57,8 @@
 - Ahora el esqueleto tiene 3 vidas y el golem 5, el esqueleto ahora revive a los 3 segundos
 - Se añadio una winScreen
 
----
-### 🔜 Próximos pasos
-- Conforme al proyecto final, se tiene pensado añadir 2-3 tipos más de enemigos para cada nivel.
-- Un HUD simple de vidas para el protagonista.
-- Una pantalla para el *Game Over* que solo te deje empezar desde el primer nivel.
-- Una pantalla de victoria simple.
+### ✅ 19 de mayo
+- Arreglo de bugs y retoques
 
-> 📝 *Se hacen estos recortes debido a la escasez de tiempo.*
+### ✅ 20 de mayo
+- Retoques finales ,arreglo de bugs y creacion de documentacion final
