@@ -29,19 +29,13 @@ public partial class Protagonista : CharacterBody2D
 
     public override void _Ready()
     {
+        //Enlace de eventos
         sprite.AnimationFinished += OnAnimationFinished;
-
-        if (hitboxataque != null)
-        {
-            hitboxataque.Monitoring = false;
-        }
-
-        if (ataque_espada != null)
-        {
-            ataque_espada.Disabled = true;
-        }
-
         hitboxataque.BodyEntered += _on_hitbox_ataque_body_entered;
+
+        //Estados iniciales
+        hitboxataque.Monitoring = false;
+        ataque_espada.Disabled = true;
 
     }
 
@@ -51,12 +45,10 @@ public partial class Protagonista : CharacterBody2D
 
         if (!muerto)
         {
-
-
             // Cooldown del dash
             dashCooldownTimer -= deltaF;
 
-            // DASH
+            //dash
             if (dashing)
             {
                 velocity.X = direccionDash * DashSpeed;
@@ -70,7 +62,6 @@ public partial class Protagonista : CharacterBody2D
                     dashing = false;
                     animación();
                 }
-
                 Velocity = velocity;
                 MoveAndSlide();
                 return;
@@ -79,7 +70,7 @@ public partial class Protagonista : CharacterBody2D
             //Condicion de muerte por caida
             if (Position.Y > 700)
             {
-                muerte();
+                ((GameOver)gameOver).mostrar();
             }
 
             // Gravedad y salto
@@ -95,14 +86,12 @@ public partial class Protagonista : CharacterBody2D
             // Movimiento horizontal
             float direccion = Input.GetActionStrength("derecha") - Input.GetActionStrength("izquierda");
             velocity.X = direccion * speed;
-
             Velocity = velocity;
             MoveAndSlide();
             velocity = Velocity;
-
             animación();
 
-            // ATAQUE
+            // ataque
             if (Input.IsActionJustPressed("atacar") && !atacando)
             {
                 sprite.Play("atacar");
@@ -147,12 +136,11 @@ public partial class Protagonista : CharacterBody2D
         }
     }
 
+    //Funcion que se encarga de la animacion del personaje 
     private void animación()
     {
         if (atacando || dashing || muerto) return;
-
         float direccion = Input.GetActionStrength("derecha") - Input.GetActionStrength("izquierda");
-
         if (direccion > 0)
         {
             sprite.Scale = new Vector2(1, 1);
@@ -176,12 +164,17 @@ public partial class Protagonista : CharacterBody2D
         else
         {
             if (direccion == 0)
+            {
                 sprite.Play("idle");
+            }
             else
+            {
                 sprite.Play("correr");
+            }
         }
     }
 
+    //Funcion que se encarga de que el personaje haga daño a los enemigos
     private void _on_hitbox_ataque_body_entered(Node body)
     {
         if (body.IsInGroup("Mushroom"))
@@ -198,6 +191,7 @@ public partial class Protagonista : CharacterBody2D
         }
     }
 
+    //Funcion en la que el personaje se hace daño
     public async void daño()
     {
         if (dañado || muerto) return;
@@ -209,7 +203,6 @@ public partial class Protagonista : CharacterBody2D
             muerte();
         }
         dañado = false;
-        GD.Print(dañado);
     }
 
     private async void muerte()
@@ -218,7 +211,6 @@ public partial class Protagonista : CharacterBody2D
         muerto = true;
         sprite.Play("muerto");
         await ToSignal(sprite, "animation_finished");
-        GD.Print("muerte");
         ((GameOver)gameOver).mostrar();
     }
 }

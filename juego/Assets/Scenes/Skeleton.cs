@@ -12,13 +12,11 @@ public partial class Skeleton : CharacterBody2D
     [Export] public float velocidad = 100.0f;
     [Export] public Timer tRevivir;
     [Export] public float distanciaPatrulla = 200.0f;
-
     private bool muerto = false;
     private bool ocupado = false;
-    private bool atacando = false;
-
+    private bool dañado = false;
     private bool jugadorDentro = false;
-    private int vida = 3;
+    private int vida = 6;
 
     private Vector2 direccionPatrulla = Vector2.Right;
     private float distanciaRecorrida = 0.0f;
@@ -86,7 +84,7 @@ public partial class Skeleton : CharacterBody2D
         estado("muerto", this);
         tRevivir.Start();
         await ToSignal(tRevivir, "timeout");
-        vida = 3;
+        vida = 6;
         sprite.Play("revivir");
         await ToSignal(sprite, "animation_finished");
         muerto = false;
@@ -103,8 +101,10 @@ public partial class Skeleton : CharacterBody2D
     {
         if (body.IsInGroup("Jugador"))
         {
-            jugadorDentro = true;
-            ocupado = true;
+            if (!dañado)
+            {
+                jugadorDentro = true;
+            }
             estado("atacar", body);
         }
     }
@@ -120,7 +120,7 @@ public partial class Skeleton : CharacterBody2D
         switch (cmd)
         {
             case "atacar":
-                if (muerto) return;
+                if (muerto || ocupado) return;
                 ocupado = true;
                 velocity.X = 0;
                 sprite.Play("atacar");
@@ -136,13 +136,15 @@ public partial class Skeleton : CharacterBody2D
                 sprite.Play("correr");
                 break;
             case "dañado":
-                if (ocupado || muerto) return;
+                if (muerto) return;
+                dañado = true;
+                jugadorDentro = false;
                 vida--;
                 ocupado = true;
                 sprite.Play("dañado");
-                GD.Print("Au");
                 await ToSignal(sprite, "animation_finished");
                 ocupado = false;
+                dañado = false;
                 break;
             case "muerto":
                 muerto = true;

@@ -474,7 +474,7 @@ hurtbox = NodePath("CollisionShape2D")
 tRevivir = NodePath("Timer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(380, 462)
+position = Vector2(380, 464)
 sprite_frames = SubResource("SpriteFrames_o5had")
 animation = &"revivir"
 frame = 14
@@ -482,7 +482,6 @@ frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(377, 465)
 shape = SubResource("RectangleShape2D_jfs31")
 

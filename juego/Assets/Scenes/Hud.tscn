@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdxxj1bmf241o"]
 
 [ext_resource type="Script" uid="uid://b8mx0vrei3c5b" path="res://Assets/Scenes/Hud.cs" id="1_cqlqq"]
-[ext_resource type="Texture2D" uid="uid://d3wsejg0s3y8d" path="res://Assets/Scenes/Hud/pixel-heart-2779422_1280.webp" id="2_dfp7b"]
+[ext_resource type="Texture2D" uid="uid://d3wsejg0s3y8d" path="res://Assets/Hud/pixel-heart-2779422_1280.webp" id="2_dfp7b"]
 
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("vida1", "vida2", "vida3")]
 script = ExtResource("1_cqlqq")

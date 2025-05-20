@@ -11,7 +11,6 @@ public partial class Hud : CanvasLayer
 
     public void quitarVida()
     {
-        GD.Print("quitar");
         if (vida <= 0) return;
         vida--;
         cambioVida();

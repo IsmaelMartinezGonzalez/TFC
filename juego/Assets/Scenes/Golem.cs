@@ -51,7 +51,7 @@ public partial class Golem : CharacterBody2D
         {
             velocity.Y = 0;
         }
-        // Moviemiento del esqueleto
+        // Moviemiento del golem
         Vector2 movimiento = direccionPatrulla * velocidad;
         velocity.X = movimiento.X;
         distanciaRecorrida += Math.Abs(velocity.X * deltaF);
@@ -63,10 +63,10 @@ public partial class Golem : CharacterBody2D
             distanciaRecorrida = 0.0f;
         }
         estado("correr", this);
-        //Voltea el sprite del esqueleto
+        //Voltea el sprite del golem
         sprite.FlipH = direccionPatrulla.X > 0;
 
-        // Cambio de direccion de la hitbox del esqueleto
+        // Cambio de direccion de la hitbox del golem
         if (direccionPatrulla.X < 0)
         {
             hitbox.Position = new Vector2(hurtbox.Position.X - 22, hitbox.Position.Y);
@@ -96,7 +96,6 @@ public partial class Golem : CharacterBody2D
         if (body.IsInGroup("Jugador"))
         {
             jugadorDentro = true;
-            ocupado = true;
             estado("atacar", body);
         }
     }
@@ -112,13 +111,14 @@ public partial class Golem : CharacterBody2D
         switch (cmd)
         {
             case "atacar":
-                if (muerto) return;
+                if (muerto || ocupado) return;
                 ocupado = true;
                 velocity.X = 0;
                 sprite.Play("atacar");
                 await ToSignal(sprite, "animation_finished");
                 if (jugadorDentro)
                 {
+                    ((Protagonista)body).daño();
                     ((Protagonista)body).daño();
                 }
                 ocupado = false;
@@ -129,8 +129,8 @@ public partial class Golem : CharacterBody2D
                 break;
             case "dañado":
                 if (ocupado || muerto) return;
-                vida--;
                 ocupado = true;
+                vida--;
                 sprite.Play("dañado");
                 await ToSignal(sprite, "animation_finished");
                 ocupado = false;

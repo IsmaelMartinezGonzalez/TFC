@@ -14,10 +14,10 @@ public partial class Mushroom : CharacterBody2D
 
     private bool muerto = false;
     private bool ocupado = false;
-    private bool atacando = false;
+    private bool dañado = false;
 
-    private bool jugadorDentro = false;
-    private int vida = 2;
+    private bool jugadorDentro = true;
+    private int vida = 4;
 
     private Vector2 direccionPatrulla = Vector2.Right;
     private float distanciaRecorrida = 0.0f;
@@ -52,7 +52,7 @@ public partial class Mushroom : CharacterBody2D
         {
             velocity.Y = 0;
         }
-        // Moviemiento del esqueleto
+        // Moviemiento de la seta
         Vector2 movimiento = direccionPatrulla * velocidad;
         velocity.X = movimiento.X;
         distanciaRecorrida += Math.Abs(velocity.X * deltaF);
@@ -64,10 +64,10 @@ public partial class Mushroom : CharacterBody2D
             distanciaRecorrida = 0.0f;
         }
         estado("correr", this);
-        //Voltea el sprite del esqueleto
+        //Voltea el sprite de la seta
         sprite.FlipH = direccionPatrulla.X > 0;
 
-        // Cambio de direccion de la hitbox del esqueleto
+        // Cambio de direccion de la hitbox de la seta
         if (direccionPatrulla.X < 0)
         {
             hitbox.Position = new Vector2(hurtbox.Position.X - 10, hitbox.Position.Y);
@@ -96,9 +96,10 @@ public partial class Mushroom : CharacterBody2D
     {
         if (body.IsInGroup("Jugador"))
         {
-            GD.Print("dentro");
-            jugadorDentro = true;
-            ocupado = true;
+            if (!dañado)
+            {
+                jugadorDentro = true;
+            }
             estado("atacar", body);
         }
     }
@@ -106,7 +107,6 @@ public partial class Mushroom : CharacterBody2D
     {
         if (body.IsInGroup("Jugador"))
         {
-            GD.Print("salir del area");
             jugadorDentro = false;
         }
     }
@@ -115,7 +115,7 @@ public partial class Mushroom : CharacterBody2D
         switch (cmd)
         {
             case "atacar":
-                if (muerto) return;
+                if (muerto || ocupado) return;
                 ocupado = true;
                 velocity.X = 0;
                 sprite.Play("atacar");
@@ -131,11 +131,14 @@ public partial class Mushroom : CharacterBody2D
                 sprite.Play("correr");
                 break;
             case "dañado":
-                if (ocupado || muerto) return;
+                if (muerto) return;
+                jugadorDentro = false;
+                dañado = true;
                 vida--;
                 ocupado = true;
                 sprite.Play("dañado");
                 await ToSignal(sprite, "animation_finished");
+                dañado = false;
                 ocupado = false;
                 break;
             case "muerto":

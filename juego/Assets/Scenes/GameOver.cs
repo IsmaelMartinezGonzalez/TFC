@@ -14,7 +14,6 @@ public partial class GameOver : CanvasLayer
 
     public void mostrar()
     {
-        GD.Print("hola");
         Visible = true;
     }
 
